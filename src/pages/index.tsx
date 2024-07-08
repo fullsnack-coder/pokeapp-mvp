@@ -1,5 +1,5 @@
-import PokemonList from "@/modules/pokemon/components/PokemonsList";
-import TypeList from "@/modules/pokemon/components/PokemonTypes";
+import PokemonList from "@/modules/pokemon/containers/PokemonsList";
+import TypeList from "@/modules/pokemon/containers/PokemonTypes";
 import { useBackgroundTypeColorContext } from "@/modules/shared/context/background-type-color";
 import AppLayout from "@/modules/shared/layouts/AppLayout";
 import { NextPage } from "next";

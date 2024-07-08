@@ -1,13 +1,6 @@
 import { DEFAULT_PAGE_SIZE } from "@/modules/shared/constants";
 import axios from "axios";
-
-export type Pokemon = {
-  name: string;
-  url: string;
-  sprites?: {
-    front: string;
-  };
-};
+import { Pokemon, PokemonDetails, PokemonType } from "../domain/models";
 
 export type PokemonDetailsResponse = {
   id: number;
@@ -37,21 +30,6 @@ export type PokemonDetailsResponse = {
   cries: {
     latest: string;
     legacy: string;
-  };
-};
-
-export type PokemonDetails = {
-  name: string;
-  pokedexId: number;
-  cries: string;
-  height: number;
-  weight: number;
-  types: Array<{ name: string; url: string }>;
-  moves: Array<{ name: string }>;
-  sprites: {
-    artwork: string;
-    default: { front: string };
-    shiny: { front: string };
   };
 };
 
@@ -112,7 +90,7 @@ class PokeAPIService {
     });
   }
 
-  async getPokemonTypes(): Promise<string[]> {
+  async getPokemonTypes(): Promise<PokemonType[]> {
     const url = new URL(`${this.baseURL}/types`);
 
     const { data } = await axios.get<TypesResponse>(url.toString());

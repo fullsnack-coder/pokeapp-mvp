@@ -1,13 +1,13 @@
-import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useQuery } from "react-query";
+import createPokemonTypeAPIRepository from "../infraestructure/data/PokemonTypeAPIRepository.infraestructure";
 
 const QUERY_KEY = "pokemon-types";
-const pokeAPIService = new PokeAPIService();
+const pokemonTypeRepository = createPokemonTypeAPIRepository();
 
 const usePokemonTypes = () => {
   const { isLoading: isLoadingTypes, data: pokemonTypes = [] } = useQuery(
     [QUERY_KEY],
-    pokeAPIService.getPokemonTypes
+    pokemonTypeRepository.getPokemonTypes
   );
 
   return {

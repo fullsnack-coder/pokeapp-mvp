@@ -14,6 +14,18 @@ const SearchBar: React.FC = () => {
     setNameFilter(searchInputRef.current?.value || "");
   }, []);
 
+  const handleChangeInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (e.target.value === "") {
+        setNameFilter("");
+      }
+    },
+    []
+  );
+
+  const isPending = isLoadingPokemonDetails && !!nameFilter;
+  const hasError = isError && !!nameFilter;
+
   return (
     <div className="flex flex-col mb-5 w-[90%] mx-auto gap-5">
       <form
@@ -25,11 +37,7 @@ const SearchBar: React.FC = () => {
           ref={searchInputRef}
           type="text"
           placeholder="Type the pokemon name"
-          onChange={(e) => {
-            if (e.target.value === "") {
-              setNameFilter("");
-            }
-          }}
+          onChange={handleChangeInput}
         />
         <button
           type="submit"
@@ -40,13 +48,13 @@ const SearchBar: React.FC = () => {
         </button>
       </form>
       <div>
-        {isLoadingPokemonDetails && !!nameFilter ? (
+        {isPending ? (
           <div className="w-fit animate-spin mx-auto">
             <Icon name="loader" />
           </div>
-        ) : isError && !!nameFilter ? (
+        ) : hasError ? (
           <div>
-            <p>Pokemon not found</p>
+            <p className="font-semibold">Pokemon not found</p>
           </div>
         ) : pokemonDetails ? (
           <div className="bg-white w-fit mx-auto">

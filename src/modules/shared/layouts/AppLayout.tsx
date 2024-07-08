@@ -1,4 +1,4 @@
-import PokemonSearch from "@/modules/pokemon/components/PokemonSearch";
+import PokemonSearch from "@/modules/pokemon/containers/PokemonSearch";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Link from "next/link";
@@ -15,7 +15,7 @@ const AppLayout: React.FC<Props> = ({ title = "Pokemon App", children }) => {
     <section className={`${inter.className}`}>
       <Head>
         <title>{title}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/pokeball.ico" />
       </Head>
       <Link href="/">
         <picture>

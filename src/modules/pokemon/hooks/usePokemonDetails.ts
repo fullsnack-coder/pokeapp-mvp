@@ -1,9 +1,9 @@
-import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useCallback } from "react";
 import { useQuery, useQueryClient } from "react-query";
+import createPokemonDetailsAPIRepository from "../infraestructure/data/PokemonDetailsAPIRepository.infraestructure";
 
 const QUERY_KEY = "pokemon-details";
-const pokeAPIService = new PokeAPIService();
+const pokemonDetailsRepository = createPokemonDetailsAPIRepository();
 
 const usePokemonDetails = (pokemonName: string) => {
   const queryClient = useQueryClient();
@@ -14,7 +14,7 @@ const usePokemonDetails = (pokemonName: string) => {
     isError,
   } = useQuery(
     [QUERY_KEY, pokemonName],
-    () => pokeAPIService.getByName(pokemonName),
+    () => pokemonDetailsRepository.getPokemonDetails(pokemonName),
     {
       enabled: !!pokemonName,
       refetchOnWindowFocus: false,

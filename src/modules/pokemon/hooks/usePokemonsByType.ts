@@ -1,9 +1,10 @@
-import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useInfiniteQuery } from "react-query";
+import createPokemonAPIRepository from "../infraestructure/data/PokemonAPIRepository.infraestructure";
+import { DEFAULT_PAGE_SIZE } from "@/modules/shared/constants";
 
 const QUERY_KEY = "pokemons-by-type";
 
-const pokeAPIService = new PokeAPIService();
+const pokemonRepository = createPokemonAPIRepository();
 
 const usePokemonsByType = (type = "") => {
   const {
@@ -13,7 +14,8 @@ const usePokemonsByType = (type = "") => {
     isFetchingNextPage,
   } = useInfiniteQuery(
     [QUERY_KEY, type],
-    ({ pageParam = 1 }) => pokeAPIService.getPokemonByType(type, pageParam),
+    ({ pageParam = 1 }) =>
+      pokemonRepository.getByType(type, pageParam, DEFAULT_PAGE_SIZE),
     {
       getNextPageParam: (lastPage, allPages) => {
         const lastPageLength = lastPage.length;
@@ -22,6 +24,8 @@ const usePokemonsByType = (type = "") => {
       },
       keepPreviousData: true,
       cacheTime: 24 * 60 * 60 * 1000, // 24 hours
+      refetchOnWindowFocus: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
       refetchOnMount: false,
       enabled: !!type,
     }

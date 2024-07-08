@@ -1,10 +1,10 @@
 import { DEFAULT_PAGE_SIZE, MAX_PAGINATIONS } from "@/modules/shared/constants";
-import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useInfiniteQuery } from "react-query";
+import createPokemonAPIRepository from "../infraestructure/data/PokemonAPIRepository.infraestructure";
 
 const QUERY_KEY = "pokemons";
 
-const pokeAPIService = new PokeAPIService();
+const pokemonRepository = createPokemonAPIRepository();
 
 type UsePokemonsFilters = {
   typeId?: number;
@@ -23,13 +23,13 @@ const usePokemons = ({ typeId, typeName }: UsePokemonsFilters) => {
     [QUERY_KEY, typeId || "", typeName || ""],
     ({ pageParam }) => {
       if (!!typeName)
-        return pokeAPIService.getPokemonByType(
+        return pokemonRepository.getByType(
           typeName,
           pageParam,
           DEFAULT_PAGE_SIZE
         );
 
-      return pokeAPIService.getPokemons(pageParam, DEFAULT_PAGE_SIZE);
+      return pokemonRepository.getPokemons(pageParam, DEFAULT_PAGE_SIZE);
     },
     {
       getNextPageParam: (lastPage, allPages) => {
