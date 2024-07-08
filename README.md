@@ -28,16 +28,17 @@ En esta app puedes buscar y filtrar los pokemons que desees además de visualiza
    ```
 3. Instala las dependencias:
    ```bash
-   npm install
+   yarn
    ```
 
 ## Cómo correr la aplicación
 
-1. Inicia el servidor de desarrollo:
+1. Renombra el archivo `.env.example` a `.env.local`
+2. Inicia el servidor de desarrollo:
    ```bash
    yarn dev
    ```
-2. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación en funcionamiento.
+3. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación en funcionamiento.
 
 ## Cómo correr los tests
 
