@@ -7,9 +7,10 @@ type Props = {
 
 const CollapsiblePanel: React.FC<PropsWithChildren<Props>> = ({
   title,
+  defaultCollapsed = false,
   children,
 }) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(defaultCollapsed);
 
   return (
     <div className="border border-gray-200 rounded-lg p-4">

@@ -3,7 +3,7 @@ import Icon from "@/modules/shared/components/Icon";
 import { useCallback, useRef, useState } from "react";
 import SearchResult from "./SearchResult";
 
-const SearchBar: React.FC = () => {
+const PokemonSearch: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const [nameFilter, setNameFilter] = useState<string>("");
   const { isLoadingPokemonDetails, pokemonDetails, isError } =
@@ -40,6 +40,7 @@ const SearchBar: React.FC = () => {
           onChange={handleChangeInput}
         />
         <button
+          role="button"
           type="submit"
           className="bg-black text-white px-4 py-2 rounded-lg flex items-center gap-2 font-semibold"
         >
@@ -49,7 +50,7 @@ const SearchBar: React.FC = () => {
       </form>
       <div>
         {isPending ? (
-          <div className="w-fit animate-spin mx-auto">
+          <div className="w-fit animate-spin mx-auto" data-testid="loader">
             <Icon name="loader" />
           </div>
         ) : hasError ? (
@@ -70,4 +71,4 @@ const SearchBar: React.FC = () => {
   );
 };
 
-export default SearchBar;
+export default PokemonSearch;

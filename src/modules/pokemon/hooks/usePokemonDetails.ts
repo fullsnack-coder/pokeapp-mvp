@@ -20,7 +20,7 @@ const usePokemonDetails = (pokemonName: string) => {
       refetchOnWindowFocus: false,
       refetchOnMount: false,
       retry: 1,
-      onError: (error) => {
+      onError: (error: any) => {
         console.error("Error on usePokemonDetails", error);
       },
     }

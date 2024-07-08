@@ -39,13 +39,9 @@ En esta app puedes buscar y filtrar los pokemons que desees además de visualiza
 
 ## Cómo correr los tests
 
-1. Ejecuta los tests unitarios:
+1. Ejecuta la bateria de pruebas
    ```bash
    yarn test
-   ```
-2. Ejecuta las pruebas end-to-end con Cypress:
-   ```bash
-   yarn test:e2e
    ```
 
 ## Tecnologías Utilizadas
@@ -76,7 +72,7 @@ El principio de vertical slicing se utiliza para dividir el código en módulos 
 
 Para ver una demostración en video de la aplicación en funcionamiento, visita el siguiente enlace:
 
-[Video Demo](enlace-al-video)
+[Video Demo](https://vimeo.com/980334346?share=copy)
 
 ---
 

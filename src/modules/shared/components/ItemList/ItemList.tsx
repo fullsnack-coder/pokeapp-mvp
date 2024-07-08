@@ -6,7 +6,7 @@ export type Props<T = any> = {
   items: T[];
   header?: JSX.Element;
   footer?: JSX.Element;
-  renderItem?: (item: T) => JSX.Element;
+  renderItem?: (item: T, idx?: number) => JSX.Element;
   emptyState?: JSX.Element;
   loader?: JSX.Element;
   direction?: "row" | "column";
@@ -27,7 +27,7 @@ function ItemList<T>({
   const handleRenderItem = useCallback(
     (item: (typeof items)[0], idx: number) => {
       if (renderItem) {
-        return renderItem(item);
+        return renderItem(item, idx);
       }
 
       return <Fragment key={idx}>{`Item ${idx}`}</Fragment>;
@@ -50,6 +50,7 @@ function ItemList<T>({
         <>{emptyState || <div className="text-center">No items to show</div>}</>
       ) : (
         <div
+          role="list"
           className={`flex gap-3 ${
             direction === "column" ? "flex-col" : "flex-row"
           }`}

@@ -58,7 +58,11 @@ const InfinitePaginatedList: React.FC<Props> = ({
       <ItemList
         isLoading={isLoadingContent}
         footer={
-          <div ref={endOfContent} className="min-h-[8vh] py-4 w-full">
+          <div
+            ref={endOfContent}
+            data-testid="end-of-content"
+            className="min-h-[8vh] py-4 w-full"
+          >
             {isLoadingMore ? (
               <span className="animate-spin block w-fit mx-auto">
                 <Icon name="loader" />

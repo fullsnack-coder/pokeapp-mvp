@@ -18,11 +18,11 @@ const SearchResult: React.FC<Props> = ({ name, sprite, types }) => {
         />
       </picture>
       <main className="flex flex-col gap-3 flex-1">
-        <p>
+        <p aria-label={name}>
           <span className="font-bold">Pokémon name: </span>
           {name}
         </p>
-        <p>
+        <p aria-label={`Types: ${types.join(",")}`}>
           <span className="font-bold">Types: </span>
           {types.join(",")}
         </p>
