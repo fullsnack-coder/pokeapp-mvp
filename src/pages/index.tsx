@@ -1,7 +1,7 @@
-import PokemonList from "@/components/Pokemons/PokemonList";
-import TypeList from "@/components/PokemonTypes/TypeList";
-import { useBackgroundTypeColorContext } from "@/context/background-type-color";
-import AppLayout from "@/layouts/AppLayout";
+import PokemonList from "@/modules/pokemon/components/PokemonsList";
+import TypeList from "@/modules/pokemon/components/PokemonTypes";
+import { useBackgroundTypeColorContext } from "@/modules/shared/context/background-type-color";
+import AppLayout from "@/modules/shared/layouts/AppLayout";
 import { NextPage } from "next";
 import { useState } from "react";
 

@@ -1,6 +1,8 @@
-import { useBackgroundTypeColorContext } from "@/context/background-type-color";
-import AppLayout from "@/layouts/AppLayout";
-import PokeAPIService, { PokemonDetails } from "@/services/PokeAPIService";
+import PokeAPIService, {
+  PokemonDetails,
+} from "@/modules/pokemon/services/PokeAPIService";
+import { useBackgroundTypeColorContext } from "@/modules/shared/context/background-type-color";
+import AppLayout from "@/modules/shared/layouts/AppLayout";
 import { GetStaticProps, NextPage } from "next";
 import { useEffect, useMemo } from "react";
 

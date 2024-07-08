@@ -1,4 +1,4 @@
-import { colorByType } from "@/utils/tools";
+import { colorByType } from "@/modules/shared/utils/tools";
 import {
   createContext,
   PropsWithChildren,

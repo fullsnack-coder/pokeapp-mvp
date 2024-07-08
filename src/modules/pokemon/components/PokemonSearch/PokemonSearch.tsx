@@ -1,8 +1,7 @@
-import usePokemonDetails from "@/hooks/usePokemonDetails";
-import Link from "next/link";
+import usePokemonDetails from "@/modules/pokemon/hooks/usePokemonDetails";
+import Icon from "@/modules/shared/components/Icon";
 import { useCallback, useRef, useState } from "react";
 import SearchResult from "./SearchResult";
-import Icon from "../Icon";
 
 const SearchBar: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);

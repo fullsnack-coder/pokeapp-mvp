@@ -1,4 +1,4 @@
-import { DEFAULT_PAGE_SIZE } from "@/contants";
+import { DEFAULT_PAGE_SIZE } from "@/modules/shared/constants";
 import axios from "axios";
 
 export type Pokemon = {

@@ -1,4 +1,4 @@
-import PokeAPIService from "@/services/PokeAPIService";
+import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useCallback } from "react";
 import { useQuery, useQueryClient } from "react-query";
 

@@ -1,4 +1,4 @@
-import { Pokemon } from "@/services/PokeAPIService";
+import { Pokemon } from "@/modules/pokemon/services/PokeAPIService";
 import { memo, NamedExoticComponent } from "react";
 
 type Props = {

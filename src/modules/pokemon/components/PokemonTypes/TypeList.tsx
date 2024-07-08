@@ -1,15 +1,15 @@
-import usePokemonTypes from "@/hooks/usePokemonTypes";
+import usePokemonTypes from "@/modules/pokemon/hooks/usePokemonTypes";
+import ItemList from "@/modules/shared/components/ItemList";
+import ActivableChip from "@/modules/shared/components/ActivableChip";
+import CollapsiblePanel from "@/modules/shared/components/CollapsiblePanel";
+import { colorByType } from "@/modules/shared/utils/tools";
 import { useCallback, useState } from "react";
-import ItemList from "../ItemList";
-import ActivableChip from "../ActivableChip";
-import CollapsiblePanel from "../CollapsiblePanel";
-import { colorByType } from "@/utils/tools";
 
 type Props = {
   onTapPokemonType: (type: string) => void;
 };
 
-const TypeList: React.FC<Props> = ({ onTapPokemonType }) => {
+const PokemonTypesList: React.FC<Props> = ({ onTapPokemonType }) => {
   const { isLoadingTypes, pokemonTypes } = usePokemonTypes();
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
@@ -67,4 +67,4 @@ const TypeList: React.FC<Props> = ({ onTapPokemonType }) => {
   );
 };
 
-export default TypeList;
+export default PokemonTypesList;

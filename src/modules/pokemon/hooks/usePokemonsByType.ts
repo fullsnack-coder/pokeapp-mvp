@@ -1,4 +1,4 @@
-import PokeAPIService from "@/services/PokeAPIService";
+import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useInfiniteQuery } from "react-query";
 
 const QUERY_KEY = "pokemons-by-type";

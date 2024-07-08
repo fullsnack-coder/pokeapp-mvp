@@ -1,4 +1,4 @@
-import paths from "@/utils/icons.json";
+import paths from "@/modules/shared/utils/icons.json";
 import SVGIcon from "../SVGIcon";
 
 type Props = {

@@ -1,5 +1,5 @@
-import { DEFAULT_PAGE_SIZE } from "@/contants";
-import { PokemonDetailsResponse } from "@/services/PokeAPIService";
+import { DEFAULT_PAGE_SIZE } from "@/modules/shared/constants";
+import { PokemonDetailsResponse } from "@/modules/pokemon/services/PokeAPIService";
 import axios, { AxiosError } from "axios";
 import { NextApiHandler } from "next";
 

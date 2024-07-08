@@ -1,5 +1,5 @@
-import { DEFAULT_PAGE_SIZE, MAX_PAGINATIONS } from "@/contants";
-import PokeAPIService from "@/services/PokeAPIService";
+import { DEFAULT_PAGE_SIZE, MAX_PAGINATIONS } from "@/modules/shared/constants";
+import PokeAPIService from "@/modules/pokemon/services/PokeAPIService";
 import { useInfiniteQuery } from "react-query";
 
 const QUERY_KEY = "pokemons";

@@ -1,5 +1,5 @@
+import Icon from "@/modules/shared/components/Icon";
 import Link from "next/link";
-import Icon from "../Icon";
 
 type Props = {
   name: string;

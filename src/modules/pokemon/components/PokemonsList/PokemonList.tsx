@@ -1,7 +1,7 @@
-import usePokemons from "@/hooks/usePokemons";
-import { Pokemon } from "@/services/PokeAPIService";
+import usePokemons from "@/modules/pokemon/hooks/usePokemons";
+import InfinitePaginatedList from "@/modules/shared/components/InfinitePaginatedList";
+import { Pokemon } from "@/modules/pokemon/services/PokeAPIService";
 import Link from "next/link";
-import InfinitePaginatedList from "../InfinitePaginatedList";
 import PokemonItem from "./PokemonItem";
 
 type Props = {

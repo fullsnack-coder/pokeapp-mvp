@@ -1,4 +1,4 @@
-import { BackgroundTypeColorProvider } from "@/context/background-type-color";
+import { BackgroundTypeColorProvider } from "@/modules/shared/context/background-type-color";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { QueryClient, QueryClientProvider } from "react-query";
