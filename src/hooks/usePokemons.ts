@@ -1,45 +1,61 @@
-import PokeAPIService from "@/services/PokeAPIService"
-import { useInfiniteQuery } from "react-query"
+import { DEFAULT_PAGE_SIZE, MAX_PAGINATIONS } from "@/contants";
+import PokeAPIService from "@/services/PokeAPIService";
+import { useInfiniteQuery } from "react-query";
 
-const QUERY_KEY = "pokemons"
+const QUERY_KEY = "pokemons";
 
-const pokeAPIService = new PokeAPIService()
+const pokeAPIService = new PokeAPIService();
 
 type UsePokemonsFilters = {
-  typeId?: number
-  typeName?: string
-}
+  typeId?: number;
+  typeName?: string;
+};
 
 const usePokemons = ({ typeId, typeName }: UsePokemonsFilters) => {
   const {
+    isLoading,
     data: pokemons,
-    isLoading: isLoadingPokemons,
+    isFetchingNextPage,
     fetchNextPage,
+    isFetching,
+    hasNextPage,
   } = useInfiniteQuery(
     [QUERY_KEY, typeId || "", typeName || ""],
     ({ pageParam }) => {
-      if (!!typeName) return pokeAPIService.getPokemonByType(typeName)
-      return pokeAPIService.getPokemons(pageParam, 10)
+      if (!!typeName)
+        return pokeAPIService.getPokemonByType(
+          typeName,
+          pageParam,
+          DEFAULT_PAGE_SIZE
+        );
+
+      return pokeAPIService.getPokemons(pageParam, DEFAULT_PAGE_SIZE);
     },
     {
       getNextPageParam: (lastPage, allPages) => {
-        const lastPokemon = lastPage[lastPage.length - 1]
-        const lastPokemonIndex = allPages
-          .flatMap((page) => page)
-          .findIndex((pokemon) => pokemon.name === lastPokemon.name)
-        return lastPokemonIndex === -1 ? undefined : lastPokemonIndex + 1
+        const lastPageLength = lastPage.length;
+        if (allPages.length === MAX_PAGINATIONS) return undefined;
+        if (lastPageLength < DEFAULT_PAGE_SIZE) return undefined;
+        return allPages.length + 1;
       },
       keepPreviousData: true,
+      cacheTime: 24 * 60 * 60 * 1000, // 24 hours
+      refetchOnMount: false,
+      staleTime: 5 * 60 * 1000, // 5 minutes
     }
-  )
+  );
+
+  const flattedPokemons = pokemons?.pages?.flatMap((page) => page) || [];
 
   return {
-    pokemons,
-    isLoadingPokemons,
+    pokemons: flattedPokemons,
+    isLoadingPokemons: isLoading || (isFetching && !isFetchingNextPage),
     fetchNextPage,
-  }
-}
+    isFetchingNextPage,
+    hasNextPage,
+  };
+};
 
-usePokemons.QUERY_KEY = QUERY_KEY
+usePokemons.QUERY_KEY = QUERY_KEY;
 
-export default usePokemons
+export default usePokemons;

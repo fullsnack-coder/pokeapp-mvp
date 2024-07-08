@@ -1,86 +1,164 @@
-import axios from "axios"
+import { DEFAULT_PAGE_SIZE } from "@/contants";
+import axios from "axios";
 
-type Pokemon = {
-  name: string
-  url: string
+export type Pokemon = {
+  name: string;
+  url: string;
   sprites?: {
-    front: string
-  }
-}
+    front: string;
+  };
+};
 
-type PokemonDetailsResponse = {
-  name: string
+export type PokemonDetailsResponse = {
+  id: number;
+  weight: number;
+  height: number;
+  types: Array<{
+    type: {
+      name: string;
+      url: string;
+    };
+  }>;
+  name: string;
   sprites: {
+    front_default: string;
     other: {
+      "official-artwork": {
+        front_default: string;
+        front_shiny: string;
+      };
       showdown: {
-        front_default: string
-      }
-    }
-    front_default: string
-  }
-}
+        front_default: string;
+        front_shiny: string;
+      };
+    };
+  };
+  moves: Array<{ move: { name: string; url: string } }>;
+  cries: {
+    latest: string;
+    legacy: string;
+  };
+};
 
-type PokemonResponse = {
+export type PokemonDetails = {
+  name: string;
+  pokedexId: number;
+  cries: string;
+  height: number;
+  weight: number;
+  types: Array<{ name: string; url: string }>;
+  moves: Array<{ name: string }>;
+  sprites: {
+    artwork: string;
+    default: { front: string };
+    shiny: { front: string };
+  };
+};
+
+export type PokemonResponse = {
   results: {
-    name: string
-    url: string
-  }[]
-}
+    name: string;
+    url: string;
+    image: string;
+  }[];
+};
+
+type PokemonByTypeResponse = {
+  pokemon: Array<{ pokemon: { name: string; url: string }; image: string }>;
+};
 
 type TypesResponse = {
   results: {
-    name: string
-    url: string
-  }[]
-}
+    name: string;
+    url: string;
+  }[];
+};
 
 class PokeAPIService {
-  private baseURL: URL
+  private baseURL: URL;
   constructor() {
-    this.baseURL = new URL("https://pokeapi.co/api/v2")
-    this.getPokemons = this.getPokemons.bind(this)
-    this.getPokemonTypes = this.getPokemonTypes.bind(this)
-    this.getPokemonDetails = this.getPokemonDetails.bind(this)
-    this.getPokemonByType = this.getPokemonByType.bind(this)
+    if (typeof window === "undefined") {
+      this.baseURL = new URL("http://127.0.0.1:3000/api/pokemon");
+    } else {
+      this.baseURL = new URL("http://localhost:3000/api/pokemon");
+    }
+    this.getPokemons = this.getPokemons.bind(this);
+    this.getPokemonTypes = this.getPokemonTypes.bind(this);
+    this.getPokemonDetails = this.getPokemonDetails.bind(this);
+    this.getPokemonByType = this.getPokemonByType.bind(this);
   }
 
-  async getPokemons(page = 1, size = 3): Promise<Pokemon[]> {
-    const url = new URL(`${this.baseURL}/pokemon`)
-    if (!!page) url.searchParams.append("offset", `${(page - 1) * size}`)
-    if (!!size) url.searchParams.append("limit", `${size}`)
-    const { data } = await axios.get<PokemonResponse>(url.toString())
-    return data.results
+  async getByName(name: string): Promise<PokemonDetails> {
+    const details = await this.getPokemonDetails(name);
+    return details;
+  }
+
+  async getPokemons(page = 1, size = 10): Promise<Pokemon[]> {
+    const url = new URL(`${this.baseURL}/`);
+    if (!!page) url.searchParams.append("offset", `${(page - 1) * size}`);
+    if (!!size) url.searchParams.append("limit", `${size}`);
+    const { data: { pokemons = [] } = {} } = await axios.get<{
+      pokemons: PokemonResponse["results"];
+    }>(url.toString());
+
+    return pokemons.map((pokemon) => {
+      return {
+        name: pokemon.name,
+        url: pokemon.url,
+        sprites: {
+          front: pokemon.image,
+        },
+      };
+    });
   }
 
   async getPokemonTypes(): Promise<string[]> {
-    const url = new URL(`${this.baseURL}/type`)
+    const url = new URL(`${this.baseURL}/types`);
 
-    const { data } = await axios.get<TypesResponse>(url.toString())
-    return data.results.map((type) => type.name)
+    const { data } = await axios.get<TypesResponse>(url.toString());
+    return data.results.map((type) => type.name);
   }
 
-  async getPokemonDetails(name: string): Promise<Pokemon> {
+  async getPokemonDetails(name: string): Promise<PokemonDetails> {
     const { data } = await axios.get<PokemonDetailsResponse>(
-      `${this.baseURL}/pokemon/${name}`
-    )
+      `${this.baseURL}/${name}`
+    );
+
     return {
       name: data.name,
-      url: "",
+      pokedexId: data.id,
+      cries: data.cries.latest,
+      types: data.types.map((type) => type.type),
+      moves: data.moves.map((move) => move.move),
+      height: data.height,
+      weight: data.weight,
       sprites: {
-        front: data.sprites.other.showdown.front_default,
+        artwork: data.sprites.other["official-artwork"].front_default,
+        default: { front: data.sprites.other.showdown.front_default },
+        shiny: { front: data.sprites.other.showdown.front_shiny },
       },
-    }
+    };
   }
 
-  async getPokemonByType(type: string, page = 1, size = 4): Promise<Pokemon[]> {
-    const url = new URL(`${this.baseURL}/type`)
-    if (!!page) url.searchParams.append("page", page + "")
-    if (!!size) url.searchParams.append("size", size + "")
-    const { data } = await axios.get<PokemonResponse>(
-      `${this.baseURL}/type/${type}`
-    )
-    return data.results.map((pokemon) => pokemon)
+  async getPokemonByType(
+    type: string,
+    page = 1,
+    size = DEFAULT_PAGE_SIZE
+  ): Promise<Pokemon[]> {
+    const url = new URL(`${this.baseURL}/by-type?type=${type}`);
+    if (!!page) url.searchParams.append("offset", `${(page - 1) * size}`);
+    if (!!size) url.searchParams.append("limit", `${size}`);
+    const { data } = await axios.get<PokemonByTypeResponse>(url.toString());
+    return data.pokemon.map(({ pokemon, image }) => {
+      return {
+        name: pokemon.name,
+        url: pokemon.url,
+        sprites: {
+          front: image,
+        },
+      };
+    });
   }
 }
 
-export default PokeAPIService
+export default PokeAPIService;
