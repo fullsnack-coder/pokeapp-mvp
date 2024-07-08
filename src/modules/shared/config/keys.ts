@@ -6,7 +6,7 @@ const configKeys = {
         process.env.NODE_ENV === "development"
           ? "http://127.0.0.1:3000"
           : process.env.NEXT_PUBLIC_HOST_DOMAIN
-      }/api/pokemon`;
+      }`;
     } else {
       return `${
         process.env.NODE_ENV === "test" ||
