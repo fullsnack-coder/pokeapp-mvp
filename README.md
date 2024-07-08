@@ -72,7 +72,7 @@ El principio de vertical slicing se utiliza para dividir el código en módulos 
 
 Para ver una demostración en video de la aplicación en funcionamiento, visita el siguiente enlace:
 
-[Video Demo](https://vimeo.com/980334346?share=copy)
+[!Video DEMO](https://vimeo.com/980334346?share=copy)
 
 ---
 
