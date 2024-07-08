@@ -1,40 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Proyecto App de Pokemon para prueba técnica
 
-## Getting Started
+En esta app puedes buscar y filtrar los pokemons que desees además de visualizar los datos de un pokemon en específico en una pantalla detalle. Este proyecto implementa principios de arquitectura hexagonal para el frontend y vertical slicing. Se utilizan los módulos `shared` y `pokemon` para organizar el código. El módulo `shared` contiene componentes y funcionalidades compartidas, mientras que el módulo `pokemon` incluye componentes con lógica específica de la aplicación. Además, se usa `react-query` y `axios` para las peticiones a la API de Next.js de forma escalable, y la capa de API de Next.js actúa como backend for frontend, obteniendo datos de [PokeAPI](https://pokeapi.co/).
 
-First, run the development server:
+## Requisitos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js versión 18.17.0 o superior
+- Yarn versión 1.22.22 o superior
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Estructura de Carpetas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- **/shared**: Contiene componentes y funcionalidades reutilizables en toda la aplicación.
+- **/pokemon**: Incluye componentes y lógica específica de la aplicación relacionada con Pokémon.
+- **/pages**: Contiene las páginas de Next.js.
+- **/api**: Implementación del backend for frontend utilizando Next.js API routes.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Instalación
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Clona el repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/tu-repositorio.git
+   ```
+2. Navega al directorio del proyecto:
+   ```bash
+   cd tu-repositorio
+   ```
+3. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Cómo correr la aplicación
 
-## Learn More
+1. Inicia el servidor de desarrollo:
+   ```bash
+   yarn dev
+   ```
+2. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver la aplicación en funcionamiento.
 
-To learn more about Next.js, take a look at the following resources:
+## Cómo correr los tests
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Ejecuta la bateria de pruebas
+   ```bash
+   yarn test
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Tecnologías Utilizadas
 
-## Deploy on Vercel
+- **React**: Biblioteca para construir interfaces de usuario.
+- **Next.js**: Framework para aplicaciones React con renderizado del lado del servidor.
+- **TypeScript**: Superset de JavaScript que añade tipos estáticos.
+- **Tailwind CSS**: Framework de CSS para un diseño rápido y responsivo.
+- **React Query**: Librería para el manejo de estado de las peticiones a APIs.
+- **Axios**: Cliente HTTP para realizar peticiones a la API.
+- **Cypress**: Framework para pruebas end-to-end.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## API
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+La aplicación obtiene datos desde [PokeAPI](https://pokeapi.co/) utilizando las rutas de API de Next.js para manejar las solicitudes y respuestas de manera escalable y eficiente.
+
+## Arquitectura
+
+### Arquitectura Hexagonal
+
+La arquitectura hexagonal se implementa para separar la lógica de la aplicación del framework y de las interfaces de usuario, facilitando el mantenimiento y la escalabilidad del código.
+
+### Vertical Slicing
+
+El principio de vertical slicing se utiliza para dividir el código en módulos cohesivos, donde cada módulo contiene todo lo necesario para una funcionalidad específica, desde el front-end hasta el back-end.
+
+## Video Demo
+
+Para ver una demostración en video de la aplicación en funcionamiento, visita el siguiente enlace:
+
+[Video Demo](https://vimeo.com/980334346?share=copy)
+
+---
+
+¡Gracias por utilizar nuestro proyecto! Si tienes alguna pregunta o sugerencia, no dudes en abrir un issue o un pull request.
