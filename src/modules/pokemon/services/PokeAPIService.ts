@@ -96,7 +96,7 @@ class PokeAPIService {
 
   async getPokemonDetails(name: string): Promise<PokemonDetails> {
     const { data } = await axios.get<PokemonDetailsResponse>(
-      `${this.baseURL}/${name}`
+      `${this.baseURL}/${name.toLowerCase().trim()}`
     );
 
     return {
@@ -120,7 +120,9 @@ class PokeAPIService {
     page = 1,
     size = DEFAULT_PAGE_SIZE
   ): Promise<Pokemon[]> {
-    const url = new URL(`${this.baseURL}/by-type?type=${type}`);
+    const url = new URL(
+      `${this.baseURL}/by-type?type=${type.toLowerCase().trim()}`
+    );
     if (!!page) url.searchParams.append("offset", `${(page - 1) * size}`);
     if (!!size) url.searchParams.append("limit", `${size}`);
     const { data } = await axios.get<PokemonByTypeResponse>(url.toString());
