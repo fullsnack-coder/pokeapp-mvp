@@ -56,9 +56,21 @@ class PokeAPIService {
   private baseURL: URL;
   constructor() {
     if (typeof window === "undefined") {
-      this.baseURL = new URL("http://127.0.0.1:3000/api/pokemon");
+      this.baseURL = new URL(
+        `${
+          process.env.NODE_ENV === "development"
+            ? "http://127.0.0.1:3000"
+            : process.env.NEXT_PUBLIC_HOST_DOMAIN
+        }/api/pokemon`
+      );
     } else {
-      this.baseURL = new URL("http://localhost:3000/api/pokemon");
+      this.baseURL = new URL(
+        `${
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:3000"
+            : process.env.NEXT_PUBLIC_HOST_DOMAIN
+        }/api/pokemon`
+      );
     }
     this.getPokemons = this.getPokemons.bind(this);
     this.getPokemonTypes = this.getPokemonTypes.bind(this);
