@@ -1,5 +1,7 @@
 # Proyecto App de Pokemon para prueba técnica
 
+![demo image](https://i.imgur.com/QNFwoRx.png)
+
 En esta app puedes buscar y filtrar los pokemons que desees además de visualizar los datos de un pokemon en específico en una pantalla detalle. Este proyecto implementa principios de arquitectura hexagonal para el frontend y vertical slicing. Se utilizan los módulos `shared` y `pokemon` para organizar el código. El módulo `shared` contiene componentes y funcionalidades compartidas, mientras que el módulo `pokemon` incluye componentes con lógica específica de la aplicación. Además, se usa `react-query` y `axios` para las peticiones a la API de Next.js de forma escalable, y la capa de API de Next.js actúa como backend for frontend, obteniendo datos de [PokeAPI](https://pokeapi.co/).
 
 ## Requisitos
@@ -72,7 +74,7 @@ El principio de vertical slicing se utiliza para dividir el código en módulos 
 
 Para ver una demostración en video de la aplicación en funcionamiento, visita el siguiente enlace:
 
-![Video DEMO](https://vimeo.com/980334346?share=copy)
+[Video DEMO](https://vimeo.com/980334346?share=copy)
 
 ---
 
