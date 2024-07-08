@@ -36,4 +36,16 @@ describe("PokemonTypesList Component", () => {
     fireEvent.click(grassChip);
     expect(mockOnTapPokemonType).toHaveBeenCalledWith("grass");
   });
+
+  test("toggles selected type when a type chip is clicked", () => {
+    const mockOnTapPokemonType = jest.fn();
+    render(<PokemonTypesList onTapPokemonType={mockOnTapPokemonType} />);
+    const grassChip = screen.getByText("grass");
+    const fireChip = screen.getByText("fire");
+    fireEvent.click(grassChip);
+    expect(grassChip).toHaveStyle("background-color: #7AC74C");
+    fireEvent.click(fireChip);
+    expect(grassChip).toHaveStyle("background-color: transparent");
+    expect(fireChip).toHaveStyle("background-color: #EE8130");
+  });
 });

@@ -1,4 +1,4 @@
-import { PokemonTypeRepository } from "../domain/repositories";
+import { PokemonTypeRepository } from "../../domain/repositories";
 
 export const GetPokemonTypes = (
   pokemonTypeRepository: PokemonTypeRepository

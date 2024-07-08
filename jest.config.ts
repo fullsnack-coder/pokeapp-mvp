@@ -13,6 +13,7 @@ const config: Config = {
   collectCoverageFrom: ["src/**/*.{ts,tsx}", "!src/**/*.d.ts"],
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+  setupFiles: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "@/(.*)": "<rootDir>/src/$1",
   },

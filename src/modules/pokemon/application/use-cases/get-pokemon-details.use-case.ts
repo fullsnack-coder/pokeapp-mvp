@@ -1,4 +1,4 @@
-import { PokemonDetailsRepository } from "../domain/repositories";
+import { PokemonDetailsRepository } from "../../domain/repositories";
 
 export const GetPokemonDetails = async (
   pokemonDetailsRepository: PokemonDetailsRepository

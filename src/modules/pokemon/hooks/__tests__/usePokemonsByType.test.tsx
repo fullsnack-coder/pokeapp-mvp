@@ -3,7 +3,6 @@ import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { PropsWithChildren } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
-import usePokemons from "../usePokemons";
 import { fakePokemons } from "./fixtures";
 import usePokemonsByType from "../usePokemonsByType";
 
